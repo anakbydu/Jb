@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JB ALI STORE - Top Up Game Online Murah, Cepat & Aman</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-dark: #0a2463;
+            --primary-medium: #1e40af;
+            --primary-light: #3b82f6;
+            --accent: #f59e0b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            background: rgba(10, 36, 99, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar.shrink {
+            padding: 8px 0;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(10, 36, 99, 0.8) 0%, rgba(30, 64, 175, 0.7) 100%);
+        }
+        
+        .game-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .step-timeline {
+            position: relative;
+        }
+        
+        .step-timeline::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 2px;
+            background: var(--primary-light);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .step-item {
+            position: relative;
+        }
+        
+        .step-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-medium);
+            border: 4px solid white;
+            top: 30px;
+        }
+        
+        .step-item:nth-child(odd)::before {
+            left: calc(50% - 40px);
+        }
+        
+        .step-item:nth-child(even)::before {
+            right: calc(50% - 40px);
+        }
+        
+        .accordion-item {
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .accordion-header {
+            background: #f8fafc;
+            padding: 16px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            padding: 16px 20px;
+            max-height: 500px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+        }
+        
+        .rating {
+            color: #f59e0b;
+        }
+        
+        .payment-method {
+            height: 30px;
+            width: auto;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* Perbaikan responsivitas */
+        .hero-slide-img {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            background-color: var(--primary-dark);
+        }
+        
+        .game-card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background-color: #f8fafc;
+            padding: 10px;
+        }
+        
+        .promo-card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background-color: white;
+        }
+        
+        .mobile-search {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .step-timeline::before {
+                left: 30px;
+            }
+            
+            .step-item::before {
+                left: 30px !important;
+                right: auto !important;
+            }
+            
+            .step-content {
+                margin-left: 60px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            .hero-content p {
+                font-size: 1rem !important;
+            }
+            
+            .navbar .container {
+                flex-wrap: wrap;
+            }
+            
+            .mobile-search-container {
+                order: 3;
+                width: 100%;
+                display: none;
+            }
+            
+            .mobile-search-container.active {
+                display: block;
+            }
+            
+            .hero-content .pulse {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            
+            .game-card {
+                margin: 0 auto;
+                max-width: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.5rem !important;
+                margin-bottom: 12px;
+            }
+            
+            .hero-content p {
+                font-size: 0.9rem !important;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem !important;
+            }
+            
+            .step-content h3 {
+                font-size: 1rem !important;
+            }
+            
+            .step-content p {
+                font-size: 0.8rem;
+            }
+            
+            .game-card-img, .promo-card-img {
+                height: 140px;
+            }
+            
+            .accordion-header {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .accordion-content {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero-content h1 {
+                font-size: 1.3rem !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .game-card-img, .promo-card-img {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 w-full z-50 py-4 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-white text-2xl font-bold flex items-center">
+                    <img src="https://files.catbox.moe/1mz5yv.png" alt="JB ALI STORE" class="h-10 mr-2">
+                    <span class="hidden sm:inline">JB ALI STORE</span>
+                </a>
+            </div>
+            
+            <div class="hidden lg:flex space-x-8 items-center">
+                <a href="#" class="text-white hover:text-blue-200 transition">Home</a>
+                <a href="#products" class="text-white hover:text-blue-200 transition">Produk</a>
+                <a href="#promo" class="text-white hover:text-blue-200 transition">Promo</a>
+                <a href="#keunggulan" class="text-white hover:text-blue-200 transition">Keunggulan</a>
+                <a href="#cara-topup" class="text-white hover:text-blue-200 transition">Cara Top Up</a>
+                <a href="#testimoni" class="text-white hover:text-blue-200 transition">Testimoni</a>
+                <a href="#faq" class="text-white hover:text-blue-200 transition">FAQ</a>
+                <a href="#support" class="text-white hover:text-blue-200 transition">Support</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center bg-white rounded-full px-3 py-1">
+                    <input type="text" placeholder="Cari game..." class="bg-transparent outline-none text-sm w-32 lg:w-40">
+                    <i class="fas fa-search text-blue-500"></i>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white"><i class="fas fa-user-circle text-xl"></i></a>
+                    <a href="#" class="text-white"><i class="fas fa-shopping-cart text-xl"></i></a>
+                    <a href="#" class="text-white md:hidden" id="search-toggle"><i class="fas fa-search text-xl"></i></a>
+                </div>
+                
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search -->
+        <div class="mobile-search-container hidden" id="mobile-search">
+            <div class="container mx-auto px-4 py-2">
+                <div class="flex items-center bg-white rounded-full px-3 py-1 mobile-search">
+                    <input type="text" placeholder="Cari game..." class="bg-transparent outline-none text-sm w-full">
+                    <i class="fas fa-search text-blue-500"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-blue-900">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="#" class="text-white py-2">Home</a>
+                <a href="#products" class="text-white py-2">Produk</a>
+                <a href="#promo" class="text-white py-2">Promo</a>
+                <a href="#keunggulan" class="text-white py-2">Keunggulan</a>
+                <a href="#cara-topup" class="text-white py-2">Cara Top Up</a>
+                <a href="#testimoni" class="text-white py-2">Testimoni</a>
+                <a href="#faq" class="text-white py-2">FAQ</a>
+                <a href="#support" class="text-white py-2">Support</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner Carousel -->
+    <section class="pt-20">
+        <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/x6v93e.png" class="hero-slide-img" alt="Free Fire">
+                        <div class="absolute inset-0 hero-overlay flex items-center">
+                            <div class="container mx-auto px-4 text-white text-center hero-content">
+                                <h1 class="text-3xl md:text-5xl font-bold mb-4 animate__animated animate__fadeInDown">Top Up Game Favoritmu, <span class="text-yellow-300 typed-text"></span></h1>
+                                <p class="text-xl md:text-2xl mb-8 animate__animated animate__fadeInUp">Cashback & Diskon Hingga 50% 🎉</p>
+                                <a href="#products" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full inline-flex items-center pulse animate__animated animate__fadeIn">
+                                    Top Up Sekarang <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/xdreet.png" class="hero-slide-img" alt="Grand Opening JB ALI STORE">
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/ke5qtn.jpg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/0z9oh5.jpg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+                
+                <!-- Slide 5 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://litter.catbox.moe/s7xmdz614cva11ba.jpg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+                
+                <!-- Slide 6 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/jlmalw.jpeg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+                
+                <!-- Slide 7 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://files.catbox.moe/0pmi5d.jpg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+                
+                <!-- Slide 8 -->
+                <div class="swiper-slide">
+                    <div class="relative w-full flex justify-center items-center bg-blue-900">
+                        <img src="https://litter.catbox.moe/llq9cfy339wxirbl.jpeg" class="hero-slide-img" alt="Banner">
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next text-white"></div>
+            <div class="swiper-button-prev text-white"></div>
+        </div>
+    </section>
+
+    <!-- Section Top Up Game -->
+    <section id="products" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4 section-title">Pilih Game Favoritmu</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Top up game favoritmu dengan harga termurah dan proses paling cepat hanya di JB ALI STORE</p>
+            </div>
+            
+            <div class="swiper gameSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Free Fire -->
+                    <div class="swiper-slide">
+                        <div class="game-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100" data-aos="flip-left" data-aos-delay="0">
+                            <div class="h-40 overflow-hidden flex items-center">
+                                <img src="https://litter.catbox.moe/eth79gqtoalxz4bv.jpeg" alt="Free Fire" class="game-card-img">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mb-2">Free Fire</h3>
+                                <p class="text-gray-600 text-sm mb-4">Top up Diamond dan dapatkan banyak item eksklusif</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-600 font-bold text-xs">Top up Game murah terpercaya?tentu aja!</span>
+                                    <a href="ff.html" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm flex items-center">
+                                        Top Up <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Legends -->
+                    <div class="swiper-slide">
+                        <div class="game-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100" data-aos="flip-left" data-aos-delay="100">
+                            <div class="h-40 overflow-hidden flex items-center">
+                                <img src="https://litter.catbox.moe/wjsk0l7p1br29mmf.webp" alt="Mobile Legends" class="game-card-img">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mb-2">Mobile Legends</h3>
+                                <p class="text-gray-600 text-sm mb-4">Diamond ML dengan harga spesial untuk kamu</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-600 font-bold text-xs">Top up Game murah terpercaya?tentu aja!</span>
+                                    <a href="ml.html" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm flex items-center">
+                                        Top Up <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PUBG Mobile -->
+                    <div class="swiper-slide">
+                        <div class="game-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100" data-aos="flip-left" data-aos-delay="200">
+                            <div class="h-40 overflow-hidden flex items-center">
+                                <img src="https://litter.catbox.moe/lk6xywn0ls4302bf.jpeg" alt="PUBG Mobile" class="game-card-img">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mb-2">PUBG Mobile</h3>
+                                <p class="text-gray-600 text-sm mb-4">UC PUBG Mobile proses instan & garansi 100%</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-600 font-bold text-xs">Top up Game murah terpercaya?tentu aja!</span>
+                                    <a href="pubg.html" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm flex items-center">
+                                        Top Up <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Valorant -->
+                    <div class="swiper-slide">
+                        <div class="game-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100" data-aos="flip-left" data-aos-delay="300">
+                            <div class="h-40 overflow-hidden flex items-center">
+                                <img src="https://litter.catbox.moe/p52muaw49dhidaab.png" alt="Valorant" class="game-card-img">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mb-2">Valorant</h3>
+                                <p class="text-gray-600 text-sm mb-4">Top up Point Valorant dengan harga terbaik</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-600 font-bold text-xs">Top up Game murah terpercaya?tentu aja!</span>
+                                    <a href="valorant.html" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm flex items-center">
+                                        Top Up <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Genshin Impact -->
+                    <div class="swiper-slide">
+                        <div class="game-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100" data-aos="flip-left" data-aos-delay="400">
+                            <div class="h-40 overflow-hidden flex items-center">
+                                <img src="https://litter.catbox.moe/iyzkww56cavqkjfs.png" class="game-card-img">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-lg mb-2">Genshin Impact</h3>
+                                <p class="text-gray-600 text-sm mb-4">Genesis Crystal Genshin Impact murah & cepat</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-blue-600 font-bold text-xs">Top up Game murah terpercaya?tentu aja!</span>
+                                    <a href="genshin.html" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm flex items-center">
+                                        Top Up <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Promo Tambahan -->
+    <section id="promo" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4 section-title">Promo Spesial Minggu Ini</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Cashback hingga 50% untuk semua game! Jangan lewatkan kesempatan ini</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated" data-aos="zoom-in">
+                    <div class="h-40 overflow-hidden flex items-center">
+                        <img src="https://litter.catbox.moe/s7xmdz614cva11ba.jpg" alt="Promo 1" class="promo-card-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Cashback 50% Free Fire</h3>
+                        <p class="text-gray-600 text-sm">Dapatkan cashback hingga 50% untuk setiap top up Free Fire</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-40 overflow-hidden flex items-center">
+                        <img src="https://files.catbox.moe/0z9oh5.jpg" alt="Promo 2" class="promo-card-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Bonus Diamond 20%</h3>
+                        <p class="text-gray-600 text-sm">Setiap top up Mobile Legends dapat bonus diamond tambahan 20%</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-40 overflow-hidden flex items-center">
+                        <img src="https://litter.catbox.moe/llq9cfy339wxirbl.jpeg" alt="Promo 3" class="promo-card-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Diskon 30% PUBG UC</h3>
+                        <p class="text-gray-600 text-sm">Khusus hari ini, diskon 30% untuk pembelian UC PUBG Mobile</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden animate__animated" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="h-40 overflow-hidden flex items-center">
+                        <img src="https://files.catbox.moe/0pmi5d.jpg" alt="Promo 4" class="promo-card-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2">Genshin Impact Bonus</h3>
+                        <p class="text-gray-600 text-sm">Top up Genesis Crystal dapat bonus Welkin Moon gratis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Keunggulan -->
+    <section id="keunggulan" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4 section-title">Kenapa Pilih JB ALI STORE?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Aman, Cepat, & Terpercaya – Ribuan Gamers Sudah Percaya JB ALI STORE!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Instan & Otomatis</h3>
+                    <p class="text-gray-600">Proses top up cepat dan otomatis, hanya butuh waktu 1-3 menit</p>
+                </div>
+                
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Aman & Terpercaya</h3>
+                    <p class="text-gray-600">Lebih dari 50.000 transaksi berhasil dengan garansi 100%</p>
+                </div>
+                
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-credit-card text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Banyak Metode Pembayaran</h3>
+                    <p class="text-gray-600">Transfer bank, e-wallet, QRIS, dan banyak metode pembayaran lainnya</p>
+                </div>
+                
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Banyak Promo & Cashback</h3>
+                    <p class="text-gray-600">Nikmati berbagai promo, cashback, dan event menarik setiap minggu</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Cara Top Up -->
+    <section id="cara-topup" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4 section-title">Cara Mudah Top Up di JB ALI STORE</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hanya dengan 5 langkah mudah, item game favoritmu akan langsung masuk ke akun</p>
+            </div>
+            
+            <div class="step-timeline relative">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
+                    <div class="step-item text-center" data-aos="fade-right">
+                        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">1</span>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="font-bold text-lg mb-2">Pilih Game</h3>
+                            <p class="text-gray-600">Pilih game yang ingin kamu top up dari berbagai pilihan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item text-center" data-aos="fade-right" data-aos-delay="100">
+                        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">2</span>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="font-bold text-lg mb-2">Masukkan ID & Server</h3>
+                            <p class="text-gray-600">Masukkan ID game dan server dengan benar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item text-center" data-aos="fade-right" data-aos-delay="200">
+                        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">3</span>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="font-bold text-lg mb-2">Pilih Nominal</h3>
+                            <p class="text-gray-600">Pilih jumlah diamond, UC, atau koin yang diinginkan</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item text-center" data-aos="fade-right" data-aos-delay="300">
+                        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">4</span>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="font-bold text-lg mb-2">Bayar dengan Metode Favorit</h3>
+                            <p class="text-gray-600">Pilih metode pembayaran yang paling nyaman untukmu</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item text-center" data-aos="fade-right" data-aos-delay="400">
+                        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">5</span>
+                        </div>
+                        <div class="step-content">
+                            <h3 class="font-bold text-lg mb-2">Item Masuk Otomatis</h3>
+                            <p class="text-gray-600">Item akan masuk ke akun game kamu secara otomatis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section FAQ -->
+    <section id="faq" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4 section-title">Pertanyaan Umum</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Temukan jawaban dari pertanyaan yang sering diajukan tentang top up game di JB ALI STORE</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="accordion-item" data-aos="fade-up">
+                    <div class="accordion-header">
+                        <span>Berapa lama proses top up di JB ALI STORE?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Proses top up di JB ALI STORE sangat cepat, biasanya hanya membutuhkan waktu 1-3 menit setelah pembayaran berhasil. Untuk beberapa game, proses bisa instan dalam hitungan detik.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="accordion-header">
+                        <span>Metode pembayaran apa saja yang diterima?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Kami menerima berbagai metode pembayaran seperti transfer bank (BCA, BNI, BRI, Mandiri), e-wallet (OVO, Gopay, Dana, ShopeePay), QRIS, dan convenience store (Alfamart, Indomaret).</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="accordion-header">
+                        <span>Apakah top up di JB ALI STORE aman?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Sangat aman! JB ALI STORE telah melayani lebih dari 50.000 transaksi dengan成功率 100%. Data pribadi dan pembayaran Anda kami jamin keamanannya.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="accordion-header">
+                        <span>Bagaimana jika terjadi kendala saat top up?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Tim customer service kami siap membantu 24/7 melalui WhatsApp, Telegram, atau live chat. Jika terjadi kendala, kami akan proses refund atau menyelesaikan masalah secara cepat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="support" class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tentang Kami</h3>
+                    <p class="mb-4">JB ALI STORE adalah platform top up game online terpercaya dengan pelayanan terbaik dan harga termurah.</p>
+                    <p>Dibuat oleh Farhan Kertadiwangsa</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Metode Pembayaran</h3>
+                    <div class="flex flex-wrap">
+                        <img src="https://files.catbox.moe/pta2z9.jpg" alt="BCA" class="payment-method">
+                        <img src="https://files.catbox.moe/cv6wm0.jpeg" alt="BNI" class="payment-method">
+                        <img src="https://files.catbox.moe/t09hyl.png" alt="BRI" class="payment-method">
+                        <img src="https://files.catbox.moe/n6fm3l.jpeg" alt="Mandiri" class="payment-method">
+                        <img src="https://files.catbox.moe/gev3e5.jpeg" alt="OVO" class="payment-method">
+                        <img src="https://files.catbox.moe/42ftkq.jpeg" alt="Gopay" class="payment-method">
+                        <img src="https://files.catbox.moe/x1tw8u.jpeg" alt="Dana" class="payment-method">
+                        <img src="https://files.catbox.moe/cy7z34.png" alt="ShopeePay" class="payment-method">
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Hubungi Kami</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            <span>+6282336479077</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-telegram mr-2"></i>
+                            <span>+6282336479077</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>farhankertadiwangsa@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Sosial Media</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-800 mt-8 pt-8 text-center">
+                <p>Copyright © 2025 JB ALI STORE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Initialize Typed.js
+        document.addEventListener('DOMContentLoaded', function() {
+            var typed = new Typed('.typed-text', {
+                strings: ["Aman", "Murah", "Cepat hanya di JB ALI STORE!"],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true
+            });
+        });
+        
+        // Initialize Swipers
+        var heroSwiper = new Swiper('.heroSwiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+        
+        var gameSwiper = new Swiper('.gameSwiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                480: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+            },
+        });
+        
+        // Navbar shrink on scroll
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('shrink');
+            } else {
+                document.querySelector('.navbar').classList.remove('shrink');
+            }
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Mobile search toggle
+        document.getElementById('search-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-search').classList.toggle('active');
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                // Toggle active class
+                content.classList.toggle('active');
+                
+                // Rotate icon
+                if (content.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    document.getElementById('mobile-search').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
